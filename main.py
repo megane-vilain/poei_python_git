@@ -1,4 +1,4 @@
-from random import random
+import random
 
 def create_player(name, pv, force, armure):
     return [name, pv, force, armure]
@@ -25,7 +25,9 @@ def start_combat(player):
             print('Le monstre attque le joueur', player[0])
             print('Il reste ', player[1], 'pv')
     if(player[1] > 0):
-        print('Le joeur', player[0], 'a battu le monstre', monster[0])   
+        print('Le joeur', player[0], 'a battu le monstre', monster[0])  
+        print('Il lui reste', player[1], 'pv')        
+                
     return player         
 
 def handle_damage(pv, armure, attack):
@@ -35,6 +37,22 @@ def handle_damage(pv, armure, attack):
         return pv - 1
 
 if __name__ == '__main__':
-    player = create_player('Megane', 50, 5, 5)
-    print('Welcome to the game', player[0])    
+    nb_monsters_killed = 0
+    play = True
+    while play:
+        player_name = input("Choisissez un pseudo pour votre personnage : ")
+        player = create_player(player_name, 50, 5, 5)
+        while player[1] > 0:
+            start_combat(player)
+            if(player[1] > 0):
+                nb_monsters_killed = nb_monsters_killed + 1
 
+        print('Le joueur', player_name, 'est décedé après avoir tué', nb_monsters_killed, 'monstres')
+        play_again = input("Aimez vous le jeu ? o/n] : ")
+    
+        while play_again.upper() != "O" and play_again.upper() != "N":
+            
+            play_again = input("Aimez vous le jeu ? [o/n] : ")
+        
+        if (play_again.upper() != "O"):
+            play = False
