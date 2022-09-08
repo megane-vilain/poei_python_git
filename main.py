@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 
 def Menu():
-    return render_template('home.hyml')
+    return render_template('home.html')
 def create_player(name, pv, force, armure):
     return [name, pv, force, armure]
 
@@ -19,7 +19,7 @@ def create_monster():
     return generate_monster(monster_name)
 
 def generate_monster(mosnster_name):
-    return [monster_name, random.randint(5,20), random.randint(3,8), random.randint(0,5)]
+    return [mosnster_name, random.randint(5,20), random.randint(3,8), random.randint(0,5)]
 
 
 def start_combat(player):
