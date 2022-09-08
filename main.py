@@ -1,12 +1,10 @@
-from crypt import methods
-from distutils.log import debug
 import random
 import sys
 import os
-from flask import flask, render_template, request, send_file, redirect, url_for, Response
+from flask import Flask, render_template, request, send_file, redirect, url_for, Response
 
 
-app = flask(__name__)
+app = Flask(__name__)
 
 @app.rote('/', methods=['GET', 'POST'])
 
