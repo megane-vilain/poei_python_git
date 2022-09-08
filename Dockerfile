@@ -1,7 +1,7 @@
-from python:3.9
+FROM python:3.9
 COPY . /app
 WORKDIR /app
-RUN pip install flash
+RUN pip install flask
 ENV PYTHONUNBUFFERED 1
 EXPOSE 8001
 CMD python3 ./main.py
