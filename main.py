@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, send_file, redirect, url_for,
 
 app = Flask(__name__)
 
-@app.rote('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 
 def Menu():
     return render_template('home.hyml')
@@ -18,7 +18,7 @@ def create_monster():
     monster_name = input('Choose a name for the next opponent: ')
     return generate_monster(monster_name)
 
-def generate_monster(monster_name):
+def generate_monster(mosnster_name):
     return [monster_name, random.randint(5,20), random.randint(3,8), random.randint(0,5)]
 
 
