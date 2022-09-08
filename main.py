@@ -1,5 +1,17 @@
+from crypt import methods
+from distutils.log import debug
 import random
+import sys
+import os
+from flask import flask, render_template, request, send_file, redirect, url_for, Response
 
+
+app = flask(__name__)
+
+@app.rote('/', methods=['GET', 'POST'])
+
+def Menu():
+    return render_template('home.hyml')
 def create_player(name, pv, force, armure):
     return [name, pv, force, armure]
 
@@ -37,6 +49,7 @@ def handle_damage(pv, armure, attack):
         return pv - 1
 
 if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8001)
     nb_monsters_killed = 0
     play = True
     while play:
