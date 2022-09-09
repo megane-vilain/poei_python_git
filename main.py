@@ -15,16 +15,15 @@ def create_player(name, pv, force, armure):
 
 @app.route('/play_game', methods=['GET', 'POST'])
 def play_game():
-    if request.form:
-        nb_monsters_killed = 0
-        player_name = request.form['pseudo']
-        player = create_player(player_name, 50, 5, 5)
-        while player[1] > 0:
-            start_combat(player)
-            if(player[1] > 0):
-                nb_monsters_killed = nb_monsters_killed + 1
+    nb_monsters_killed = 0
+    player_name = request.form['pseudo']
+    player = create_player(player_name, 50, 5, 5)
+    while player[1] > 0:
+        start_combat(player)
+        if(player[1] > 0):
+            nb_monsters_killed = nb_monsters_killed + 1
 
-        return render_template("play.html", nb_monster=str(nb_monsters_killed))
+    return render_template("play.html", nb_monster=str(nb_monsters_killed))
 
 def create_monster():
     monster_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
