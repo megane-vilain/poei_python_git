@@ -7,15 +7,29 @@ from flask import Flask, render_template, request, send_file, redirect, url_for,
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
-
 def Menu():
     return render_template('home.html')
+
 def create_player(name, pv, force, armure):
     return [name, pv, force, armure]
 
+@app.route('/play_game', methods=['GET', 'POST'])
+def play_game():
+    if request.form:
+        nb_monsters_killed = 0
+        player_name = request.form['pseudo']
+        player = create_player(player_name, 50, 5, 5)
+        while player[1] > 0:
+            start_combat(player)
+            if(player[1] > 0):
+                nb_monsters_killed = nb_monsters_killed + 1
+
+        print('Le joueur', player_name, 'est décedé après avoir tué', nb_monsters_killed, 'monstres')
+        return render_template("play.html", nb_monster=nb_monsters_killed)
 
 def create_monster():
-    monster_name = input('Choose a name for the next opponent: ')
+    monster_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    monster_name = random.choice(monster_names)
     return generate_monster(monster_name)
 
 def generate_monster(mosnster_name):
@@ -48,22 +62,3 @@ def handle_damage(pv, armure, attack):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8001)
-    nb_monsters_killed = 0
-    play = True
-    while play:
-        player_name = input("Choisissez un pseudo pour votre personnage : ")
-        player = create_player(player_name, 50, 5, 5)
-        while player[1] > 0:
-            start_combat(player)
-            if(player[1] > 0):
-                nb_monsters_killed = nb_monsters_killed + 1
-
-        print('Le joueur', player_name, 'est décedé après avoir tué', nb_monsters_killed, 'monstres')
-        play_again = input("Aimez vous le jeu ? o/n] : ")
-    
-        while play_again.upper() != "O" and play_again.upper() != "N":
-            
-            play_again = input("Aimez vous le jeu ? [o/n] : ")
-        
-        if (play_again.upper() != "O"):
-            play = False

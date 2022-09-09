@@ -1,0 +1,8 @@
+<form action="{{ url_for('play_game')}}">
+    <label for="player">Pseudo:</label><br>
+    <input type="text" id="player" name="player" placeholder="Pseudo"><br>
+    <input type="submit" value="Submit">
+    {% if name %}
+    <p>Vous avez vaincu {{ nb_monster }} monstres !</p>
+    {% endif %}
+</form>
