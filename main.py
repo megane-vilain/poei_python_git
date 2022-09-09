@@ -17,7 +17,7 @@ def create_player(name, pv, force, armure):
 def play_game():
     if request.method == 'POST':
         nb_monsters_killed = 0
-        player_name = request.form['pseudo']
+        player_name = request.form.get['player']
         player = create_player(player_name, 50, 5, 5)
         while player[1] > 0:
             start_combat(player)
