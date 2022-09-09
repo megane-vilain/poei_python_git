@@ -15,6 +15,7 @@ def create_player(name, pv, force, armure):
 
 @app.route('/play_game', methods=['GET', 'POST'])
 def play_game():
+    nb_monsters_killed = 0
     if request.form:
         nb_monsters_killed = 0
         player_name = request.form['pseudo']
