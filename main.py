@@ -1,7 +1,5 @@
 import random
-import sys
-import os
-from flask import Flask, render_template, request, send_file, redirect, url_for, Response
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -17,7 +15,7 @@ def create_player(name, pv, force, armure):
 def play_game():
     if request.method == 'POST':
         nb_monsters_killed = 0
-        player_name = request.form.get['player']
+        player_name = request.form.get('player')
         player = create_player(player_name, 50, 5, 5)
         while player[1] > 0:
             start_combat(player)
