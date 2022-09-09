@@ -24,8 +24,7 @@ def play_game():
             if(player[1] > 0):
                 nb_monsters_killed = nb_monsters_killed + 1
 
-        print('Le joueur', player_name, 'est décedé après avoir tué', nb_monsters_killed, 'monstres')
-        return render_template("play.html", nb_monster=nb_monsters_killed)
+        return render_template("play.html", nb_monster=str(nb_monsters_killed))
 
 def create_monster():
     monster_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -41,17 +40,8 @@ def start_combat(player):
     player
     while player[1] > 0 and monster[1] > 0:
         monster[1] = handle_damage(monster[1], monster[2], player[2])
-        print('Le joueur', player[0], 'attaque le monstre', monster[0])
-        print('Il lui reste', monster[1], 'pv')
-
         if(monster[1] > 0):
-            player[1] = handle_damage(player[1], player[2], monster[2])
-            print('Le monstre attque le joueur', player[0])
-            print('Il reste ', player[1], 'pv')
-    if(player[1] > 0):
-        print('Le joeur', player[0], 'a battu le monstre', monster[0])  
-        print('Il lui reste', player[1], 'pv')        
-                
+            player[1] = handle_damage(player[1], player[2], monster[2])         
     return player         
 
 def handle_damage(pv, armure, attack):
