@@ -21,7 +21,7 @@ def play_game():
             start_combat(player)
             if(player[1] > 0):
                 nb_monsters_killed = nb_monsters_killed + 1
-        return render_template("play.html", nb_monster=str(nb_monsters_killed))        
+        return render_template("play.html", player=player_name, nb_monster=str(nb_monsters_killed))        
     return render_template("play.html")
 
 def create_monster():
